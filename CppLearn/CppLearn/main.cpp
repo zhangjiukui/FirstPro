@@ -6,16 +6,44 @@
 //  Copyright © 2017年 张久奎. All rights reserved.
 //
 
-#include "Singleton.hpp"
-#include <stdio.h>
-
+#include<iostream>
+#include <string>
+#include <vector>
+using namespace std;
+void replaceTableToSpace(string str)
+{
+    vector<string>words;
+    string::iterator p = str.begin();
+    string sepword;
+    while (p != str.end())
+    {
+        if (*p == '\t')
+        {
+            words.push_back (sepword);
+            sepword.clear();
+        }
+        else
+        {
+            sepword += *p;
+        }
+        p++;
+        if (*p == '\0')
+        {
+            words.push_back (sepword);
+            break;
+        }
+    }
+    for (string result : words)
+    {
+        cout << result;
+        cout << "    ";
+    }
+    return;
+}
 
 int main(){
-    Singleton* singleton1 = Singleton::getInstance();
-    Singleton* singleton2 = Singleton::getInstance();
-    
-    if (singleton1 == singleton2)
-        fprintf(stderr,"singleton1 = singleton2\n");
-    
+    string tab = "\t";
+    string str = "Hello" + tab + "Everyone!";
+    replaceTableToSpace(str);
     return 0;
 }
